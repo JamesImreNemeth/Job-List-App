@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 
 // Componenets
 import JobDetails from '../components/jobDetails'
+import JobForm from '../components/JobForm'
+
 
 const Home = () => {
     const [jobs, setJobs] = useState(null)
@@ -26,6 +28,7 @@ const Home = () => {
                     <JobDetails key={job._id} job={job}/>
                 ))}
             </div>
+            <JobForm />
         </div>
 
     )
