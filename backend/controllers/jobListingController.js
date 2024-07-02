@@ -29,6 +29,21 @@ const getJob = async (req, res) => {
 const createJob = async (req, res) => {
     const {title, info, priority, repeats} = req.body
     
+    let emptyFields = []
+
+    if (!title) {
+        emptyFields.push('title')
+    }
+    if (!info) {
+        emptyFields.push('info')
+    }
+    if (!priority) {
+        emptyFields.push('priority')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all fields required', emptyFields })
+    }
+
     // Add doc to DB
     try {
         const jobList = await jobListModel.create({title, info, priority, repeats})

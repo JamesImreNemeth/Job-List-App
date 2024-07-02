@@ -20,7 +20,7 @@ const Home = () => {
         }
 
         fetchJobs()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">

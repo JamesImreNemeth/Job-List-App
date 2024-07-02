@@ -9,6 +9,7 @@ const JobForm = () => {
     const [priority, setPriority] = useState('')
     const [repeats, setRepeats] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -26,12 +27,14 @@ const JobForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             setTitle('')
             setInfo('')
             setPriority('')
             setRepeats('')
+            setEmptyFields([])
             setError(null)
             dispatch({type: 'CREATE_JOB', payload: json})
         }
@@ -46,18 +49,21 @@ const JobForm = () => {
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
+                className={emptyFields.includes('title') ? 'error' : ''}
             />
             <label>Job Information:</label>
             <input
                 type="text"
                 onChange={(e) => setInfo(e.target.value)}
                 value={info}
+                className={emptyFields.includes('info') ? 'error' : ''}
             />
             <label>Job Priority:</label>
             <input
                 type="text"
                 onChange={(e) => setPriority(e.target.value)}
                 value={priority}
+                className={emptyFields.includes('priority') ? 'error' : ''}
             />
             <label>Repeat: (Not necessary)</label>
             <input

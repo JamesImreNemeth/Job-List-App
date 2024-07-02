@@ -63,8 +63,9 @@ header a {
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
-  border-radius: 50%;
-  color: #333;
+  border-radius: 10%;
+  color: #000000;
+  background-color: rgba(255, 0, 0, 0.692);
 }
 
 /* new job form */
@@ -96,4 +97,7 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }
