@@ -1,16 +1,19 @@
 import { useState } from "react"
+import { useJobsContext } from "../hooks/useJobsContext"
 
 const JobForm = () => {
+    const { dispatch } = useJobsContext()
+
     const [title, setTitle] = useState('')
     const [info, setInfo] = useState('')
     const [priority, setPriority] = useState('')
-    const [repeat, setRepeat] = useState('')
+    const [repeats, setRepeats] = useState('')
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const job = {title, info, priority, repeat}
+        const job = {title, info, priority, repeats}
 
         const response = await fetch('/api/jobs', {
             method: 'POST',
@@ -28,9 +31,9 @@ const JobForm = () => {
             setTitle('')
             setInfo('')
             setPriority('')
-            setRepeat('')
+            setRepeats('')
             setError(null)
-            console.log('New Job Added', json)
+            dispatch({type: 'CREATE_JOB', payload: json})
         }
     } 
 
@@ -59,8 +62,8 @@ const JobForm = () => {
             <label>Repeat: (Not necessary)</label>
             <input
                 type="number"
-                onChange={(e) => setRepeat(e.target.value)}
-                value={repeat}
+                onChange={(e) => setRepeats(e.target.value)}
+                value={repeats}
             />
             <button>Add Job</button>
             {error && <div className="error">{error}</div>}
