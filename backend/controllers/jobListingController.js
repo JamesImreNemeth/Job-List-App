@@ -59,7 +59,7 @@ const deleteJob = async (req, res) => {
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such Job Found'})
+        return res.status(404).json({error: 'No Job Found'})
     }
     
     const job = await jobListModel.findOneAndDelete({_id: id})
